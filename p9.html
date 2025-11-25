@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program 9 – Random User Info</title>
+
+<style>
+    body {
+        font-family: Poppins, sans-serif;
+        background: #f4f9ff;
+        text-align: center;
+        padding: 40px;
+    }
+
+    h1 {
+        color: #2d5ea8;
+        font-size: 36px;
+        margin-bottom: 25px;
+    }
+
+    #card {
+        width: 350px;
+        background: #ffffff;
+        margin: auto;
+        padding: 30px;
+        border-radius: 18px;
+        border: 1px solid #d4e3ff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 3px solid #2d6ae0;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+        margin: 8px 0;
+    }
+
+    #loadBtn {
+        margin-top: 25px;
+        padding: 12px 25px;
+        background: #2d6ae0;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: 0.2s;
+    }
+
+    #loadBtn:hover {
+        background: #1b52b5;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Random User Information</h1>
+
+<div id="card">
+    <img id="userImg" src="" alt="User Picture">
+    <p id="userName">Name: --</p>
+    <p id="userEmail">Email: --</p>
+</div>
+
+<button id="loadBtn">Load Random User</button>
+
+<script>
+document.getElementById("loadBtn").addEventListener("click", loadUser);
+
+function loadUser() {
+    fetch("https://randomuser.me/api/")
+        .then(response => response.json())
+        .then(data => {
+            const user = data.results[0];
+
+            const fullName = `${user.name.first} ${user.name.last}`;
+            const email = user.email;
+            const picture = user.picture.large;
+
+            document.getElementById("userImg").src = picture;
+            document.getElementById("userName").textContent = "Name: " + fullName;
+            document.getElementById("userEmail").textContent = "Email: " + email;
+        })
+        .catch(error => {
+            alert("Error loading user!");
+            console.log(error);
+        });
+}
+</script>
+
+</body>
+</html>
