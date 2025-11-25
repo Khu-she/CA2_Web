@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program 5 – Color Changer</title>
+
+<!-- INTERNAL CSS -->
+<style>
+    body {
+        margin: 0;
+        font-family: Poppins, sans-serif;
+        text-align: center;
+        transition: background-color 0.4s ease;
+        background: #f4f9ff;
+    }
+
+    .container {
+        margin-top: 100px;
+    }
+
+    h1 {
+        color: #2d5ea8;
+    }
+
+    #colorName {
+        font-size: 22px;
+        font-weight: 600;
+        margin-top: 20px;
+        color: #1f3a66;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        background: #2d6ae0;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #1c57c2;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Color Changer Web Page</h1>
+
+    <button onclick="changeColor()">Change Background Color</button>
+
+    <p id="colorName">Current Color: Default</p>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+    const colors = ["#FFB5E8", "#B5EAD7", "#FFDAC1", "#C7CEEA", "#E2F0CB", 
+                    "#A0E7E5", "#FFAEBC", "#B4F8C8", "#B8E0FF", "#FFD6A5"];
+
+    const colorNames = ["Soft Pink", "Mint", "Peach", "Lavender", "Light Green",
+                        "Aqua", "Rose", "Pastel Green", "Sky Blue", "Pastel Orange"];
+
+    let index = 0;
+
+    function changeColor() {
+        document.body.style.backgroundColor = colors[index];
+        document.getElementById("colorName").textContent =
+            "Current Color: " + colorNames[index];
+
+        index++;
+
+        if (index === colors.length) {
+            index = 0;
+        }
+    }
+</script>
+
+</body>
+</html>

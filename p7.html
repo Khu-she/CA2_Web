@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program 7 – Form Validation</title>
+
+<style>
+    body {
+        font-family: Poppins, sans-serif;
+        background: #f4f9ff;
+        padding: 40px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2d5ea8;
+    }
+
+    .form-box {
+        width: 350px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid #d0e0ff;
+    }
+
+    label {
+        font-weight: 600;
+        color: #1d3557;
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 8px 0 15px 0;
+        border-radius: 6px;
+        border: 1px solid #a9c7ff;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #2d6ae0;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1b52b5;
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    .success {
+        color: green;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>User Registration Form</h1>
+
+<div class="form-box">
+
+    <label>Name:</label><br>
+    <input type="text" id="name">
+    <p id="nameError" class="error"></p>
+
+    <label>Email:</label><br>
+    <input type="text" id="email">
+    <p id="emailError" class="error"></p>
+
+    <label>Password:</label><br>
+    <input type="password" id="password">
+    <p id="passError" class="error"></p>
+
+    <label>Confirm Password:</label><br>
+    <input type="password" id="confirmPassword">
+    <p id="confirmError" class="error"></p>
+
+    <button onclick="validateForm()">Register</button>
+
+    <p id="successMessage" class="success"></p>
+</div>
+
+<script>
+    function validateForm() {
+        // Clear previous messages
+        document.getElementById("nameError").innerHTML = "";
+        document.getElementById("emailError").innerHTML = "";
+        document.getElementById("passError").innerHTML = "";
+        document.getElementById("confirmError").innerHTML = "";
+        document.getElementById("successMessage").innerHTML = "";
+
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        let valid = true;
+
+        // Name Validation
+        if (name === "") {
+            document.getElementById("nameError").innerHTML = "Name is required.";
+            valid = false;
+        }
+
+        // Email Validation
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+        if (email === "") {
+            document.getElementById("emailError").innerHTML = "Email is required.";
+            valid = false;
+        } else if (!emailPattern.test(email)) {
+            document.getElementById("emailError").innerHTML = "Enter a valid email.";
+            valid = false;
+        }
+
+        // Password Validation
+        if (password.length < 6) {
+            document.getElementById("passError").innerHTML = "Password must be at least 6 characters.";
+            valid = false;
+        }
+
+        // Confirm Password Validation
+        if (password !== confirmPassword) {
+            document.getElementById("confirmError").innerHTML = "Passwords do not match.";
+            valid = false;
+        }
+
+        // Final Success Message
+        if (valid) {
+            document.getElementById("successMessage").innerHTML =
+                "Registration Successful!";
+        }
+    }
+</script>
+
+</body>
+</html>

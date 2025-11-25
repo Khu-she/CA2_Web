@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program 6 – Simple Interest Calculator</title>
+
+<style>
+    body {
+        font-family: Poppins, sans-serif;
+        background: #f4f9ff;
+        padding: 40px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #2d5ea8;
+    }
+
+    .box {
+        width: 350px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid #d3e3ff;
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #a9c7ff;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #2d6ae0;
+        border: none;
+        color: white;
+        font-size: 17px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1b52b5;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1c325c;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Simple Interest Calculator</h1>
+
+<div class="box">
+    <input type="number" id="p" placeholder="Enter Principal Amount">
+    <input type="number" id="r" placeholder="Enter Rate (%)">
+    <input type="number" id="t" placeholder="Enter Time (Years)">
+
+    <button id="calcBtn">Calculate Interest</button>
+
+    <p id="result">Interest: —</p>
+</div>
+
+<script>
+    // ===== Module 1: Logic (ES6 Arrow Function + const) =====
+    const calculateInterest = (p, r, t) => (p * r * t) / 100;
+
+    // ===== Module 2: Display Result (Template literal + const) =====
+    const displayResult = (interest) => {
+        document.getElementById("result").innerHTML = 
+            `Interest: ₹${interest.toFixed(2)}`;
+    };
+
+    // ===== Event Handler using let + arrow function =====
+    document.getElementById("calcBtn").addEventListener("click", () => {
+        let p = parseFloat(document.getElementById("p").value);
+        let r = parseFloat(document.getElementById("r").value);
+        let t = parseFloat(document.getElementById("t").value);
+
+        if (isNaN(p) || isNaN(r) || isNaN(t)) {
+            document.getElementById("result").innerHTML = "Please fill all fields correctly!";
+            return;
+        }
+
+        const interest = calculateInterest(p, r, t);
+        displayResult(interest);
+    });
+</script>
+
+</body>
+</html>
